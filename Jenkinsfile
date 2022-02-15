@@ -35,7 +35,7 @@ pipeline {
 					sh 'cat $HOME/dependency-check-report.xml'
 					sh 'python -m pip install requests'
 					sh 'chmod +x upload-files.py'
-					sh 'python upload-files.py --host $DEFECT_HOST --api_key $KEY --name $env.JOB_NAME --result_file $HOME/dependency-check-report.xml --scanner "Dependency Check Scan"'
+					sh 'python upload-files.py --host $DEFECT_HOST --api_key $KEY --name ${env.JOB_NAME} --result_file $HOME/dependency-check-report.xml --scanner "Dependency Check Scan"'
 				}
 			}
 		}
