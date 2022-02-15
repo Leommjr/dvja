@@ -34,8 +34,9 @@ pipeline {
 				withCredentials([string(credentialsId: 'api_key', variable: 'KEY'), string(credentialsId: 'defect_host', variable: 'DEFECT_HOST')]) {
 					sh 'cat $HOME/dependency-check-report.xml'
 					sh 'python -m pip install requests'
+					sh 'JOB_NAME=$env.JOB_NAME'
 					sh 'chmod +x upload-files.py'
-					sh 'python upload-files.py --host $DEFECT_HOST --api_key $KEY --name ${env.JOB_NAME} --result_file $HOME/dependency-check-report.xml --scanner "Dependency Check Scan"'
+					sh 'python upload-files.py --host $DEFECT_HOST --api_key $KEY --name $JOB_NAME --result_file $HOME/dependency-check-report.xml --scanner "Dependency Check Scan"'
 				}
 			}
 		}
