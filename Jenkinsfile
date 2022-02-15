@@ -21,14 +21,10 @@ pipeline {
     
     stage ('Dependency Check') {
       steps {
-	      withEnv(["HOME=${env.WORKSPACE}"]) {
         dependencyCheck additionalArguments: '''
-              -o "$HOME" 
-              -s "$HOME"
               -f "XML"''', odcInstallation: 'Dependency-Check'
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 	      }
-      }
     }
     
     stage ('Upload Reports to Defect Dojo') {
